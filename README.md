@@ -1,17 +1,3 @@
-# Database challenge
-
-Practice using a SQLite database to power a Node/Express web app.
-
-## Setup
-
-Make sure you have Git and Node (v18) installed.
-
-1. [Use this template](https://github.com/foundersandcoders/database-challenge/generate), clone your copy, cd into it
-1. Run `npm install` to install all the dependencies
-1. Run `npm run seed` to seed the database with some example data
-1. Run `npm run dev` to start the server.  
-   This uses the `nodemon` library to auto-restart the server when you save changes.
-
 This app already has the routes and templates created. Your job is to fill out the model functions so the routes can access the data they need.
 
 Note: you won't be able to load pages without errors until you've completed the challenges below.
