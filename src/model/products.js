@@ -1,7 +1,7 @@
 const db = require("../database/db.js");
 
 //challenge 1
-const select_products = db.prepare(/*sql*/
+const select_products = db.prepare(
     `SELECT 
     id,
     name,
@@ -17,7 +17,6 @@ const listProducts = () => {
 return select_products.all();
 };
 let allProducts = listProducts();
-console.log(allProducts.name)
 
 //challenge 2
 
@@ -32,18 +31,34 @@ const searchProducts = (searchString) =>{
 return search_products.all(`%${searchString}%`)
 };
 //challenge 3
-const get_product = db.prepare(
+// const get_product = db.prepare(
+//     ` SELECT
+//         id,
+//         name
+//         FROM products
+//         WHERE id LIKE ?
+//     `
+// );
+
+// const getProduct = (id) => {
+//     return get_product.all(`${id}`)
+// };
+
+//challenge 4
+const get_product = db.prepare(/*sql*/
     ` SELECT
-        id,
-        name
+        products.id,
+        products.name,
+        categories.name AS category_name,
+        categories.description AS category_description
         FROM products
-        WHERE id LIKE ?
+        JOIN categories ON products.category_id = categories.id
+        WHERE products.id = ?
     `
 );
-
 const getProduct = (id) => {
-    const product = get_product.all(`${id}`)
-    product ? {id: product.id,name: product.name} : null
+    return get_product.get(id)
 };
+
 
 module.exports = { listProducts, searchProducts, getProduct }
