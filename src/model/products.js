@@ -31,6 +31,19 @@ const search_products = db.prepare(/*sql*/ `
 const searchProducts = (searchString) =>{
 return search_products.all(`%${searchString}%`)
 };
+//challenge 3
+const get_product = db.prepare(
+    ` SELECT
+        id,
+        name
+        FROM products
+        WHERE id LIKE ?
+    `
+);
 
+const getProduct = (id) => {
+    const product = get_product.all(`${id}`)
+    product ? {id: product.id,name: product.name} : null
+};
 
-module.exports = { listProducts, searchProducts }
+module.exports = { listProducts, searchProducts, getProduct }
