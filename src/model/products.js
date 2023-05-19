@@ -66,10 +66,10 @@ const list_products = db.prepare(/*sql*/`
     id,
     name,
     quantity_per_unit,
-    unit_price,
-    units_in_stock, 
+    FORMAT('£%.2f', unit_price) AS unit_price,
+    units_in_stock,
     units_on_order,
-    unit_price * units_in_stock AS stock_value
+    FORMAT('£%.2f', unit_price * units_in_stock) AS stock_value
     FROM products
 `
 )
