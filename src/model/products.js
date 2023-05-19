@@ -13,10 +13,9 @@ const select_products = db.prepare(
     `
 );
 
-const listProducts = () => {
-return select_products.all();
-};
-let allProducts = listProducts();
+// const listProducts = () => {
+// return select_products.all();
+// };
 
 //challenge 2
 
@@ -60,5 +59,24 @@ const getProduct = (id) => {
     return get_product.get(id)
 };
 
+//challenge 5
+
+const list_products = db.prepare(/*sql*/`
+    SELECT
+    id,
+    name,
+    quantity_per_unit,
+    unit_price,
+    units_in_stock, 
+    units_on_order,
+    unit_price * units_in_stock AS stock_value
+    FROM products
+`
+)
+
+const listProducts = () => {
+    return list_products.all();
+    };
+    
 
 module.exports = { listProducts, searchProducts, getProduct }
